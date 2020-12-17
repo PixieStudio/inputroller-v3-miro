@@ -1,0 +1,274 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#cookieModal > h1 {
+    color: #d33682;
+}
+
+#cookieModal > h2 {
+    color: #b58900;
+}
+
+.scrollable-container {
+    height: calc(100% - 150px);
+    position: relative;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 1em;
+}
+
+.scrollable-container-quick {
+    height: calc(100% - 70px);
+    position: relative;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 1em;
+}
+
+.scrollable-container-modal {
+    height: 100%;
+    position: relative;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 1em;
+}
+
+.draggable {
+    cursor: move;
+}
+
+.draggable.dragging {
+    background-color: #333;
+    color: blanchedalmond;
+    opacity: 0.5;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+/* RESULT */
+.card-body-result {
+    padding: 0;
+}
+
+.dice-set-result {
+    display: block;
+    margin: 0.5em 0 0 0;
+    padding: 0.5em;
+    border-bottom-color: rgba(22, 22, 22, 0.5);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
+.dice-set-result p {
+    margin: 0;
+}
+
+.btn-blank {
+    display: block;
+    background: none;
+}
+
+.target-success {
+    color: rgba(23, 196, 0, 0.75);
+}
+
+.target-failure {
+    color: rgba(203, 76, 22, 1);
+}
+
+.keep-value {
+    color: rgba(255, 238, 0, 0.75);
+}
+
+.btn-dice-result {
+    width: 35px;
+    height: 35px;
+    padding: 0;
+}
+
+.title-set-black {
+    color: rgba(22, 22, 22, 1);
+    font-weight: bold;
+}
+
+.title-set-white {
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: bold;
+}
+
+.title-set-red {
+    color: rgba(203, 76, 22, 1);
+    font-weight: bold;
+}
+
+.title-set-green {
+    color: rgba(23, 196, 0, 0.75);
+    font-weight: bold;
+}
+
+.title-set-blue {
+    color: rgba(0, 183, 255, 0.75);
+    font-weight: bold;
+}
+
+.title-set-yellow {
+    color: rgba(255, 238, 0, 0.75);
+    font-weight: bold;
+}
+
+/* DICE COLOR */
+.btn-dice {
+    width: 25px;
+    height: 25px;
+    padding: 0;
+}
+
+.btn-black {
+    color: rgba(255, 255, 255, 0.75);
+    background: rgb(0, 0, 0) -webkit-gradient(linear, left top, left bottom, from(rgb(41, 41, 41)), to(rgb(0, 0, 0))) repeat-x;
+    background: rgb(0, 0, 0) linear-gradient(180deg, rgb(41, 41, 41), rgb(0, 0, 0)) repeat-x;
+    border-color: rgb(0, 0, 0);
+}
+
+.btn-black:hover {
+    color: rgba(255, 255, 255, 0.75);
+    background: rgb(0, 0, 0) -webkit-gradient(linear, left top, left bottom, from(rgb(0, 0, 0)), to(rgb(41, 41, 41))) repeat-x;
+    background: rgb(0, 0, 0) linear-gradient(180deg, rgb(0, 0, 0), rgb(41, 41, 41)) repeat-x;
+    border-color: rgb(41, 41, 41);
+}
+
+.btn-black:focus,
+.btn-black.focus {
+    color: rgba(255, 255, 255, 0.75);
+    background: rgb(0, 0, 0) -webkit-gradient(linear, left top, left bottom, from(rgb(0, 0, 0)), to(rgb(41, 41, 41))) repeat-x;
+    background: rgb(0, 0, 0) linear-gradient(180deg, rgb(0, 0, 0), rgb(41, 41, 41)) repeat-x;
+    border-color: rgb(0, 0, 0);
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(223, 223, 223, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(223, 223, 223, 0.5);
+}
+
+.btn-white {
+    color: rgba(255, 255, 255, 0.75);
+    background: #d4d4d4 -webkit-gradient(linear, left top, left bottom, from(#d4d4d4), to(#969696)) repeat-x;
+    background: #d4d4d4 linear-gradient(180deg, #d4d4d4, #969696) repeat-x;
+    border-color: #d4d4d4;
+}
+
+.btn-white:hover {
+    color: rgba(255, 255, 255, 0.75);
+    background: #d4d4d4 -webkit-gradient(linear, left top, left bottom, from(#969696), to(#d4d4d4)) repeat-x;
+    background: #d4d4d4 linear-gradient(180deg, #969696, #d4d4d4) repeat-x;
+    border-color: #d4d4d4;
+}
+
+.btn-white:focus,
+.btn-white.focus {
+    color: rgba(255, 255, 255, 0.75);
+    background: #969696 -webkit-gradient(linear, left top, left bottom, from(#969696), to(#d4d4d4)) repeat-x;
+    background: #969696 linear-gradient(180deg, #969696, #d4d4d4) repeat-x;
+    border-color: #969696;
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(223, 223, 223, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(223, 223, 223, 0.5);
+}
+
+.btn-red {
+    color: rgba(255, 255, 255, 0.75);
+    background: #e02d2d -webkit-gradient(linear, left top, left bottom, from(#e02d2d), to(#a01f1f)) repeat-x;
+    background: #e02d2d linear-gradient(180deg, #e02d2d, #a01f1f) repeat-x;
+    border-color: #e02d2d;
+}
+
+.btn-red:hover {
+    color: rgba(255, 255, 255, 0.75);
+    background: #e02d2d -webkit-gradient(linear, left top, left bottom, from(#a01f1f), to(#e02d2d)) repeat-x;
+    background: #e02d2d linear-gradient(180deg, #a01f1f, #e02d2d) repeat-x;
+    border-color: #e02d2d;
+}
+
+.btn-red:focus,
+.btn-red.focus {
+    color: rgba(255, 255, 255, 0.75);
+    background: #a01f1f -webkit-gradient(linear, left top, left bottom, from(#a01f1f), to(#e02d2d)) repeat-x;
+    background: #a01f1f linear-gradient(180deg, #a01f1f, #e02d2d) repeat-x;
+    border-color: #a01f1f;
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(223, 223, 223, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(223, 223, 223, 0.5);
+}
+
+.btn-green {
+    color: rgba(255, 255, 255, 0.75);
+    background: #279e27 -webkit-gradient(linear, left top, left bottom, from(#279e27), to(#175e17)) repeat-x;
+    background: #279e27 linear-gradient(180deg, #279e27, #175e17) repeat-x;
+    border-color: #279e27;
+}
+
+.btn-green:hover {
+    color: rgba(255, 255, 255, 0.75);
+    background: #279e27 -webkit-gradient(linear, left top, left bottom, from(#175e17), to(#279e27)) repeat-x;
+    background: #279e27 linear-gradient(180deg, #175e17, #279e27) repeat-x;
+    border-color: #279e27;
+}
+
+.btn-green:focus,
+.btn-green.focus {
+    color: rgba(255, 255, 255, 0.75);
+    background: #175e17 -webkit-gradient(linear, left top, left bottom, from(#175e17), to(#279e27)) repeat-x;
+    background: #175e17 linear-gradient(180deg, #175e17, #279e27) repeat-x;
+    border-color: #175e17;
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(223, 223, 223, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(223, 223, 223, 0.5);
+}
+
+.btn-blue {
+    color: rgba(255, 255, 255, 0.75);
+    background: #11b4dd -webkit-gradient(linear, left top, left bottom, from(#11b4dd), to(#09748f)) repeat-x;
+    background: #11b4dd linear-gradient(180deg, #11b4dd, #09748f) repeat-x;
+    border-color: #11b4dd;
+}
+
+.btn-blue:hover {
+    color: rgba(255, 255, 255, 0.75);
+    background: #11b4dd -webkit-gradient(linear, left top, left bottom, from(#09748f), to(#11b4dd)) repeat-x;
+    background: #11b4dd linear-gradient(180deg, #09748f, #11b4dd) repeat-x;
+    border-color: #11b4dd;
+}
+
+.btn-blue:focus,
+.btn-blue.focus {
+    color: rgba(255, 255, 255, 0.75);
+    background: #09748f -webkit-gradient(linear, left top, left bottom, from(#09748f), to(#11b4dd)) repeat-x;
+    background: #09748f linear-gradient(180deg, #09748f, #11b4dd) repeat-x;
+    border-color: #09748f;
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(223, 223, 223, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(223, 223, 223, 0.5);
+}
+
+.btn-yellow {
+    color: rgba(255, 255, 255, 0.75);
+    background: #ddbe11 -webkit-gradient(linear, left top, left bottom, from(#ddbe11), to(#b68706)) repeat-x;
+    background: #ddbe11 linear-gradient(180deg, #ddbe11, #b68706) repeat-x;
+    border-color: #ddbe11;
+}
+
+.btn-yellow:hover {
+    color: rgba(255, 255, 255, 0.75);
+    background: #ddbe11 -webkit-gradient(linear, left top, left bottom, from(#b68706), to(#ddbe11)) repeat-x;
+    background: #ddbe11 linear-gradient(180deg, #b68706, #ddbe11) repeat-x;
+    border-color: #ddbe11;
+}
+
+.btn-yellow:focus,
+.btn-yellow.focus {
+    color: rgba(255, 255, 255, 0.75);
+    background: #b68706 -webkit-gradient(linear, left top, left bottom, from(#b68706), to(#ddbe11)) repeat-x;
+    background: #b68706 linear-gradient(180deg, #b68706, #ddbe11) repeat-x;
+    border-color: #b68706;
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(223, 223, 223, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(223, 223, 223, 0.5);
+}

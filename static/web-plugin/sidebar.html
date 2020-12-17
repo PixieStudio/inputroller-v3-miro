@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/sidebar.css">
+</head>
+
+<body>
+    <div class="container p-0 m-0">
+        <div class="mt-4">
+            <h2 class="text-center pt-4">
+                <span class="text-primary text-uppercase">Input Roller v3</span>
+            </h2>
+        </div>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" id="homeTab" href="#" onclick="UI.displayPage('home')">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" id="classicTab" href="#"
+                    onclick="UI.displayPage('classic')">Classique</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" id="fudgeTab" href="#" onclick="UI.displayPage('fudge')">Fate</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" id="resultsTab" href="#"
+                    onclick="UI.displayPage('results')">Resultats</a>
+            </li>
+        </ul>
+    </div>
+    <div class="scrollable-container">
+        <!-- Home Page -->
+        <div id="home-container" style="display:none">
+            <button class="my-3 btn btn-primary btn-sm btn-block" id="goToPool">Voir le conteneur sur le board</button>
+            <button class="my-3 btn btn-primary btn-sm btn-block" id="clearPoolLog">Vider le Log (définitif)</button>
+            <h4 class="text-info">Bienvenue !</h4>
+            <p>Input Roller est un lanceur de dés en version Beta.</p>
+            <p>Il est possible que certaines fonctionnalités ne soient pas encore complètement fonctionnelles.</p>
+            <p>Si vous rencontrez un bug ou des difficultés d'utilisation, n'hésitez pas à me faire un retour via
+                Discord</p>
+            <a href="https://discord.gg/jBghwAz" target="_blank"><button
+                    class="my-3 btn btn-danger btn-sm btn-block">Serveur Discord : MIRROR</button></a>
+            <p>Vous pouvez soutenir mes projets et accéder à l'installation des plugins complets et beta via mon Patreon
+            </p>
+            <a href="https://www.patreon.com/laflys" target="_blank"><button
+                    class="my-3 btn btn-danger btn-sm btn-block">Patreon
+                    Laflys : MIRROR</button></a>
+            <h4 class="text-info">Comment l'utiliser ?</h4>
+            <p>Choisissez un onglet système (Classique ou Fate actuellement)</p>
+            <h5 class="text-danger">Classique</h5>
+            <p>Dés numériques, ajoutez autant de "Set de dés" que vous voulez (un minimum). Les Sets
+                peuvent être différenciés par le choix de couleur des dés.</p>
+            <p>Les <strong>Options</strong> disponibles sous le bouton "Ajouter un set de dés" ne sont actuellement
+                disponible que pour le tout premier Set.</p>
+            <h5 class="text-danger">Fate</h5>
+            <p>Premier système intégré au plugin. Il vous permettra de jeter les dés Fate. </p>
+            <p>Les options de traitement sont à venir</p>
+            <h5 class="text-danger">Retrouver le conteneur</h5>
+            <p>Les jets de dés sont stockés dans un conteneur sur le board, ayant pour titre "Input Roller". Il est créé
+                lors du premier jet de dés et est indispensable. Vous pouvez le supprimer, cela effacera le log. Un
+                nouveau conteneur sera automatique créé au prochain lancé de dés.</p>
+            <h5 class="text-danger">Vider le log</h5>
+            <p>Comme son nom l'indique, supprime tous les jets de dés stockés. L'opération est irréversible.</p>
+        </div>
+        <!-- Classics Dice Page -->
+        <div id="classic-container" style="display:none">
+            <!-- Roll Dice -->
+            <div class="form-group">
+                <button type="button" class="btn btn-primary btn-block" id="rollClassicDice">Lancer les dés</button>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="hiddenRoll">
+                        <label class="custom-control-label" for="hiddenRoll">Jet Caché</label>
+                    </div>
+                </div>
+                <div class="form-group ml-3">
+                    <div class="custom-control custom-checkbox" onclick="UI.switchDisplay('postIt')">
+                        <input type="checkbox" class="custom-control-input" id="postIt">
+                        <label class="custom-control-label" for="postIt">Post-It</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Personnage ou Pseudo</label>
+                <div class="form-group">
+                    <input type="text" class="form-control" aria-label="Username" id="usernameC">
+                </div>
+            </div>
+            <!-- Container dice set -->
+            <div id="diceSetContainer">
+            </div>
+            <button type="button" class="my-3 btn btn-primary btn-sm btn-block" id="moreDice">Ajouter un Set de
+                Dés</button>
+            <!-- Critical Fumble  -->
+            <div class="form-group">
+                <div class="custom-control custom-switch" onclick="UI.switchDisplay('criticalSwitch')">
+                    <input type="checkbox" class="custom-control-input" id="criticalSwitch">
+                    <label class="custom-control-label" for="criticalSwitch">Critique / Fumble</label>
+                </div>
+            </div>
+            <div class="form-group" id="criticalTarget" style="display:none">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Succès Critique</span>
+                    </div>
+                    <select class="custom-select" id="criticalOptions">
+                        <option value="gt">&gt;</option>
+                        <option value="gteq">&gt;=</option>
+                        <option value="lt">&lt;</option>
+                        <option value="lteq">&lt;=</option>
+                    </select>
+                    <input type="number" class="form-control" aria-label="Critical success target" id="criticalValue"
+                        min="1">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Échec Critique &nbsp;</span>
+                    </div>
+                    <select class="custom-select" id="fumbleOptions">
+                        <option value="gt">&gt;</option>
+                        <option value="gteq">&gt;=</option>
+                        <option value="lt">&lt;</option>
+                        <option value="lteq">&lt;=</option>
+                    </select>
+                    <input type="number" class="form-control" aria-label="Fumble target" id="fumbleValue" min="1">
+                </div>
+            </div>
+            <!-- Explode Option  -->
+            <div class="form-group">
+                <div class="custom-control custom-switch" onclick="UI.switchDisplay('explodeSwitch')">
+                    <input type="checkbox" class="custom-control-input" id="explodeSwitch">
+                    <label class="custom-control-label" for="explodeSwitch">Dés Explosifs</label>
+                </div>
+            </div>
+            <div class="form-group" id="explodeTarget" style="display:none">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Valeur minimale d'explosion</span>
+                    </div>
+                    <input type="number" class="form-control" aria-label="Valeur minimale explosion" id="explodeValue"
+                        min="1">
+                </div>
+            </div>
+            <!-- Advantage Option  -->
+            <div class="form-group">
+                <div class="custom-control custom-switch" onclick="UI.switchDisplay('advantageSwitch')">
+                    <input type="checkbox" class="custom-control-input" id="advantageSwitch">
+                    <label class="custom-control-label" for="advantageSwitch">Conserver les meilleurs</label>
+                </div>
+            </div>
+            <div class="form-group" id="advantageKeepDice" style="display:none">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Combien de dés à conserver ?</span>
+                    </div>
+                    <input type="number" class="form-control" aria-label="How many dice to keep" id="advantageValue">
+                </div>
+            </div>
+            <!-- Disadvantage Option  -->
+            <div class="form-group">
+                <div class="custom-control custom-switch" onclick="UI.switchDisplay('disadvantageSwitch')">
+                    <input type="checkbox" class="custom-control-input" id="disadvantageSwitch">
+                    <label class="custom-control-label" for="disadvantageSwitch">Conserver les pires</label>
+                </div>
+            </div>
+            <div class="form-group" id="disadvantageKeepDice" style="display:none">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Combien de dés à conserver ?</span>
+                    </div>
+                    <input type="number" class="form-control" aria-label="How many dice to keep" id="disadvantageValue">
+                </div>
+            </div>
+            <!-- Target Number  -->
+            <div class="form-group">
+                <div class="custom-control custom-switch" onclick="UI.switchDisplay('targetNumberSwitch')">
+                    <input type="checkbox" class="custom-control-input" id="targetNumberSwitch">
+                    <label class="custom-control-label" for="targetNumberSwitch">Succès Cible (dés séparés)</label>
+                </div>
+            </div>
+            <div class="form-group" id="targetNumber" style="display:none">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Chaque dé doit être </span>
+                    </div>
+                    <select class="custom-select" id="targetOptions">
+                        <option value="gt">&gt;</option>
+                        <option value="gteq">&gt;=</option>
+                        <option value="lt">&lt;</option>
+                        <option value="lteq">&lt;=</option>
+                    </select>
+                    <input type="number" class="form-control" aria-label="Target Number" id="targetValue" min="1">
+                </div>
+            </div>
+            <!-- Difficulty Test  -->
+            <div class="form-group">
+                <div class="custom-control custom-switch" onclick="UI.switchDisplay('difficultyTestSwitch')">
+                    <input type="checkbox" class="custom-control-input" id="difficultyTestSwitch">
+                    <label class="custom-control-label" for="difficultyTestSwitch">Difficulté (somme des dés)</label>
+                </div>
+            </div>
+            <div class="form-group" id="difficultyTest" style="display:none">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">La somme doit être </span>
+                    </div>
+                    <select class="custom-select" id="difficultyOptions">
+                        <option value="gt">&gt;</option>
+                        <option value="gteq">&gt;=</option>
+                        <option value="lt">&lt;</option>
+                        <option value="lteq">&lt;=</option>
+                    </select>
+                    <input type="number" class="form-control" aria-label="Difficulty" id="difficultyValue" min="0">
+                </div>
+            </div>
+        </div>
+        <!-- Fudge Dice Page -->
+        <div id="fudge-container" style="display:none">
+            <!-- Roll Dice -->
+            <div class="form-group">
+                <button type="button" class="btn btn-primary btn-block" id="rollFateDice">Lancer les dés</button>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Personnage ou Pseudo</label>
+                <div class="form-group">
+                    <input type="text" class="form-control" aria-label="Username" id="usernameF">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="custom-control custom-checkbox" onclick="UI.switchDisplay('fateSticker')">
+                    <input type="checkbox" class="custom-control-input" id="fateSticker">
+                    <label class="custom-control-label" for="fateSticker">Post-It</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Dés</label>
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control number-dice" aria-label="Number of dice"
+                            id="numberFateDice" min="1">
+                        <span class="input-group-text">+</span>
+                        <input type="number" class="form-control mod-dice" aria-label="Modificator" id="modFateDice">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="results-container" style="display:none"></div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/9504dcbbc9.js" crossorigin="anonymous"></script>
+    <script src="https://miro.com/app/static/sdk.1.1.js"></script>
+    <script type="text/javascript" src="./js/utils.js"></script>
+    <script type="text/javascript" src="./js/dice.js"></script>
+    <script type="text/javascript" src="./js/dice_parser.js"></script>
+    <script type="text/javascript" src="./js/result_parser.js"></script>
+    <script type="text/javascript" src="./js/ui.js"></script>
+    <script type="text/javascript" src="./js/events_sidebar.js"></script>
+
+</body>
+
+</html>
