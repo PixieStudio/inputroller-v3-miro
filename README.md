@@ -4,7 +4,7 @@
 
 Clone this repository to your local workspace.
 
-`git clone `
+`git clone git@github.com:PixieStudio/inputroller-v3-miro.git`
 
 Install packages.
 
